@@ -1,5 +1,6 @@
 <img width="1918" height="909" alt="image" src="https://github.com/user-attachments/assets/3f76aa05-4c4e-433d-9f43-a46ec6c20e2b" />
 
+
 ClientsVendes - Gestor de Clients i Vendes
 ClientsVendes és una aplicació de gestió lleugera i eficient dissenyada per a petites empreses. Permet portar un control exhaustiu dels clients, les vendes i les despeses mitjançant una interfície web intuïtiva i una base de dades local robusta.
 
