@@ -1,9 +1,4 @@
-# TODO: Replace Prompt with Modal for Date Selection in Export
-
-## Tasks
-- [ ] Add date selection modal to index.html
-- [ ] Style the modal in styles.css
-- [ ] Update script.js to handle modal for exportAllToExcel function
-- [ ] Add event listeners for modal buttons
-- [ ] Test the export with calendar selection
-- [ ] Update TODO.md to reflect completion
+- [ ] Add "Exportar Base de dades" button to index.html header
+- [ ] Add JavaScript functionality in script.js for database download
+- [ ] Update CSS in styles.css for green button styling
+- [ ] Test the button functionality

@@ -28,6 +28,7 @@ const addExpenseForm = document.getElementById('addExpenseForm');
 const backToList = document.getElementById('backToList');
 const exportBtn = document.getElementById('exportBtn');
 const exportClientBtn = document.getElementById('exportClientBtn');
+const exportDbBtn = document.getElementById('exportDbBtn');
 const deleteModal = document.getElementById('deleteModal');
 const confirmDelete = document.getElementById('confirmDelete');
 const cancelDelete = document.getElementById('cancelDelete');
@@ -66,6 +67,7 @@ addExpenseForm.addEventListener('submit', addExpense);
 backToList.addEventListener('click', showClientList);
 exportBtn.addEventListener('click', exportAllToExcel);
 exportClientBtn.addEventListener('click', exportClientToExcel);
+exportDbBtn.addEventListener('click', exportDatabase);
 manageSnippetsBtn.addEventListener('click', showSnippetsModal);
 saveSnippetBtn.addEventListener('click', saveSnippet);
 closeSnippetsModal.addEventListener('click', hideSnippetsModal);
@@ -358,6 +360,23 @@ function exportClientToExcel() {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, client.name);
     XLSX.writeFile(wb, `${client.name}.xlsx`);
+}
+
+function exportDatabase() {
+    fetch('http://localhost:3000/api/export-db')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to download database');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            saveAs(blob, 'clients.db');
+        })
+        .catch(error => {
+            console.error('Error downloading database:', error);
+            alert('Error downloading database. Please try again.');
+        });
 }
 
 

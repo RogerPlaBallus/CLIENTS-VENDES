@@ -134,11 +134,11 @@ button:hover {
     margin-top: 20px;
 }
 
-#exportBtn, #exportClientBtn {
+#exportBtn, #exportClientBtn, #exportDbBtn {
     background-color: #4CAF50;
 }
 
-#exportBtn:hover, #exportClientBtn:hover {
+#exportBtn:hover, #exportClientBtn:hover, #exportDbBtn:hover {
     background-color: #45a049;
 }
 
