@@ -42,16 +42,23 @@ __Requisits previs__
 
 Cal tenir instal·lat Node.js al sistema.
 
-__Passos a seguir__
+### Passos per a la posada en marxa
 
-1. Descarregar el repositori a la teva màquina local.
-2. Instal·lar les dependències:
-   ```bash
-   npm install
-Executar l'aplicació:
+1.  **Descarregar o clonar** el repositori a la teva màquina local.
+2.  **Instal·lar les dependències** necessàries executant a la terminal:
+    ```bash
+    npm install
+    ```
+3.  **Iniciar el servidor**:
+    ```bash
+    node server.js
+    ```
+4.  **Accedir a l'aplicació**:
+    Obre el navegador i entra a `http://localhost:3000` o utilitza l'accés directe `Gestió de Clients (LOCALHOST).url` inclòs a l'arrel del projecte.
 
-Bash
+---
 
-node server.js 
+## ⚙️ Configuració Addicional
 
-Accés: Obre el teu navegador i accedeix a la URL indicada (normalment localhost:3000) o utilitza l'accés directe Gestió de Clients (LOCALHOST).url inclòs en el projecte.
+Per a detalls tècnics sobre la instal·lació en entorns locals específics, consulta el fitxer:
+📄 `INSTRUCCIONS-NODE-LOCAL.txt`
