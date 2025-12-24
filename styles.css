@@ -1,0 +1,278 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #2c3e50;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #34495e;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#clientList {
+    list-style: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#clientList li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#clientList li:hover {
+    background-color: #f9f9f9;
+}
+
+#clientList li:last-child {
+    border-bottom: none;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.delete-btn {
+    background-color: red;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+#backToList {
+    margin-top: 20px;
+}
+
+#exportBtn, #exportClientBtn {
+    background-color: #4CAF50;
+}
+
+#exportBtn:hover, #exportClientBtn:hover {
+    background-color: #45a049;
+}
+
+#expenseList, #snippetsList {
+    list-style: none;
+    margin-top: 20px;
+}
+
+#expenseList {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#expenseList li, #snippetsList li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#expenseList li:last-child, #snippetsList li:last-child {
+    border-bottom: none;
+}
+
+#vendesList {
+    list-style: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#vendesList li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#vendesList li:last-child {
+    border-bottom: none;
+}
+
+.small-delete-btn {
+    padding: 5px 8px;
+    font-size: 14px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+#deleteModal .modal-content {
+    width: 300px;
+    text-align: center;
+    padding: 20px;
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+}
+
+.modal-content label {
+    margin-top: 10px;
+}
+
+.modal-content button {
+    margin-top: 10px;
+}
+
+#snippetsList li {
+    cursor: pointer;
+}
+
+#snippetsList li:hover {
+    background-color: #f9f9f9;
+}
+
+.client-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#clientInfo {
+    margin-bottom: 20px;
+}
+
+#clientInfo p {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .header-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .client-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #clientList li {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+}

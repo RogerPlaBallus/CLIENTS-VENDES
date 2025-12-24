@@ -1,0 +1,62 @@
+INSTRUCCIONS:
+
+INSTALA NODE
+
+1. Obrir la Terminal
+Prem la tecla Windows, escriu PowerShell i selecciona Executa com a administrador.
+
+2. Buscar i instal·lar Node.js
+Escriu la següent comanda per instal·lar la versió LTS (la més estable i recomanada):
+
+
+winget install OpenJS.NodeJS.LTS
+
+
+3. Acceptar els termes
+Durant el procés, la consola et demanarà si acceptes els acords de llicència. Prem la tecla Y i després Enter.
+
+4. Reiniciar la consola i verificar
+És important tancar la finestra de PowerShell i tornar-la a obrir perquè es reconeguin les noves rutes del sistema. Un cop oberta de nou, comprova que tot estigui correcte:
+
+PowerShell
+
+node -v
+npm -v
+Si et retornen els números de versió (per exemple, v20.x.x), ja tens Node.js instal·lat i a punt
+
+
+
+
+
+
+_______________________
+
+1. Crear l'script invisible
+Obre el Bloc de notes i enganxa aquest codi:
+
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run "cmd.exe /c cd /d C:\Users\roger\Desktop\ESTETICAMARTA && npm start", 0
+Set WshShell = Nothing
+
+
+2. Desar el fitxer
+Ves a Fitxer > Anomena i desa.
+
+Al desplegable "Tipus", selecciona Tots els fitxers (.).
+
+Posa-li el nom: iniciar_node.vbs (és molt important que acabi en .vbs).
+
+Desa'l en un lloc segur (per exemple, a la mateixa carpeta del projecte).
+
+
+3. Configurar l'arrencada automàtica
+Prem la tecla Windows + R.
+
+Escriu shell:startup i prem Enter. S'obrirà una carpeta.
+
+Copia i enganxa el teu fitxer iniciar_node.vbs dins d'aquesta carpeta.
+
+4. Verificació
+Reinicia el PC o simplement fes doble clic sobre el fitxer .vbs que has creat.
+
+Com que és invisible, no veuràs cap finestra. Per confirmar que funciona, obre el navegador i entra a l'adreça de la teva aplicació (ex: localhost:3000).

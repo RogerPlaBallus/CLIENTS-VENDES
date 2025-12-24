@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Clients</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>GESTOR DE CLIENTS</h1>
+        <div class="header-buttons">
+            <button id="iniciBtn">Clients</button>
+            <button id="vendesBtn">Vendes</button>
+            <button id="newClientBtn">Nou Client</button>
+            <button id="exportBtn">Exportar TOT a Excel</button>
+        </div>
+    </header>
+    <main>
+        <section id="clientListSection">
+            <h2>Llista de Clients</h2>
+            <input type="text" id="searchInput" placeholder="Buscar client per nom...">
+            <ul id="clientList"></ul>
+        </section>
+        <section id="newClientSection" class="hidden">
+            <h2>Afegir Nou Client</h2>
+            <form id="newClientForm">
+                <label for="name">Nom:</label>
+                <input type="text" id="name">
+                <label for="phone">Telèfon:</label>
+                <input type="tel" id="phone">
+                <label for="email">Correu:</label>
+                <input type="email" id="email">
+                <label for="address">Adreça:</label>
+                <input type="text" id="address">
+                <button type="submit">Afegir Client</button>
+                <button type="button" id="cancelNewClient">Cancel·lar</button>
+            </form>
+        </section>
+        <section id="clientDetailsSection" class="hidden">
+            <div class="client-header">
+                <h2>Informe del Client: <span id="clientName"></span></h2>
+                <button id="exportClientBtn">Exportar client a Excel</button>
+            </div>
+            <div id="clientInfo">
+                <p><strong>Telèfon:</strong> <span id="clientPhone"></span></p>
+                <p><strong>Correu:</strong> <span id="clientEmail"></span></p>
+                <p><strong>Adreça:</strong> <span id="clientAddress"></span></p>
+            </div>
+            <h3>Gastos</h3>
+            <form id="addExpenseForm">
+                <label for="expenseDate">Data:</label>
+                <input type="date" id="expenseDate" required>
+                <label for="expenseProduct">Producte o Servei:</label>
+                <input type="text" id="expenseProduct" required>
+                <button type="button" id="manageSnippetsBtn" title="Selecciona producte o servei">Selecciona producte o servei 📝</button>
+                <label for="expensePrice">Preu (€):</label>
+                <input type="number" step="0.01" id="expensePrice" required>
+                <button type="submit">Afegir Gasto</button>
+            </form>
+            <ul id="expenseList"></ul>
+            <button id="backToList"><-- Torna enrere</button>
+        </section>
+        <section id="vendesSection" class="hidden">
+            <h2>Llista de Vendes</h2>
+            <ul id="vendesList"></ul>
+        </section>
+    </main>
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p id="deleteMessage">Esborrar?</p>
+            <button id="confirmDelete">si</button>
+            <button id="cancelDelete">no</button>
+        </div>
+    </div>
+    <!-- Snippets Modal -->
+    <div id="snippetsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Gestionar productes o serveis guardats</h3>
+            <label for="snippetText">Producte o Servei:</label>
+            <input type="text" id="snippetText" placeholder="Escriu aquí...">
+            <label for="snippetPrice">Preu (€):</label>
+            <input type="number" step="0.01" id="snippetPrice" placeholder="Escriu aquí...">
+            <button id="saveSnippetBtn">Guardar</button>
+            <h4>Selecciona:</h4>
+            <ul id="snippetsList"></ul>
+            <button id="closeSnippetsModal">Tancar</button>
+        </div>
+    </div>
+    <!-- Export Date Selection Modal -->
+    <div id="exportModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Seleccionar Dates per Exportar</h3>
+            <label for="exportStartDate">Des de (Data d'inici):</label>
+            <input type="date" id="exportStartDate" required>
+            <label for="exportEndDate">Fins (Data de fi):</label>
+            <input type="date" id="exportEndDate" required>
+            <button id="confirmExport">Exportar</button>
+            <button id="cancelExport">Cancel·lar</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
