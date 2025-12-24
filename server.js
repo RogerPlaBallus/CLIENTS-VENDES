@@ -17,7 +17,29 @@ app.use(express.static('.'));
 const upload = multer({ dest: 'uploads/' });
 
 // Database setup
-const DB_PATH = 'clients.db';
+const DB_PATH = 'Clients.db';
+
+// Monthly database backup logic
+const now = new Date();
+const day = String(now.getDate()).padStart(2, '0');
+const month = String(now.getMonth() + 1).padStart(2, '0');
+const year = now.getFullYear();
+const dateStr = `${day}-${month}-${year}`;
+const currentMonthYear = `/${month}/${year}`;
+
+const backupDir = 'Base de Dades Mensual';
+if (!fs.existsSync(backupDir)) {
+    fs.mkdirSync(backupDir);
+}
+
+const files = fs.readdirSync(backupDir);
+const exists = files.some(file => file.startsWith('Clients_') && file.includes(currentMonthYear) && file.endsWith('.db'));
+
+if (!exists) {
+    const dest = path.join(backupDir, `Clients_${dateStr}.db`);
+    fs.copyFileSync(DB_PATH, dest);
+    console.log(`Monthly backup created: ${dest}`);
+}
 
 function initializeDatabase() {
     const db = new sqlite3.Database(DB_PATH);
