@@ -1,4 +1,0 @@
-- [ ] Add "Exportar Base de dades" button to index.html header
-- [ ] Add JavaScript functionality in script.js for database download
-- [ ] Update CSS in styles.css for green button styling
-- [ ] Test the button functionality
