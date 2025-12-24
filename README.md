@@ -52,5 +52,6 @@ Executar l'aplicació:
 
 Bash
 
-node server.js
+node server.js 
+
 Accés: Obre el teu navegador i accedeix a la URL indicada (normalment localhost:3000) o utilitza l'accés directe Gestió de Clients (LOCALHOST).url inclòs en el projecte.
