@@ -2,53 +2,52 @@
 
 
 ClientsVendes - Gestor de Clients i Vendes
-ClientsVendes és una aplicació de gestió lleugera i eficient dissenyada per a petites empreses. Permet portar un control exhaustiu dels clients, les vendes i les despeses mitjançant una interfície web intuïtiva i una base de dades local robusta.
+==========================================
+
+__ClientsVendes__ és una aplicació de gestió lleugera i eficient dissenyada per a petites empreses. Permet portar un control exhaustiu dels clients, les vendes i les despeses mitjançant una interfície web intuïtiva i una base de dades local robusta.
 
 🚀 Característiques Principals
-Gestió de Clients (CRUD): Creació, visualització i eliminació de clients de forma centralitzada.
+----------------------------
 
-Control de Vendes i Despeses: Registre detallat de transaccions associades a cada client.
-
-Despeses Habituals: Sistema per crear, guardar i suprimir despeses recurrents per agilitzar el flux de treball.
-
-Exportació de Dades: Funcionalitat per exportar tota la informació a format Excel i realitzar còpies de seguretat de la base de dades.
-
-Interfície Neta: Disseny minimalista i funcional pensat per a l'usuari final.
+- __Gestió de Clients (CRUD):__ Creació, visualització i eliminació de clients de forma centralitzada.
+- __Control de Vendes i Despeses:__ Registre detallat de transaccions associades a cada client.
+- __Despeses Habituals:__ Sistema per crear, guardar i suprimir despeses recurrents per agilitzar el flux de treball.
+- __Exportació de Dades:__ Funcionalitat per exportar tota la informació a format Excel i realitzar còpies de seguretat de la base de dades.
+- __Interfície Neta:__ Disseny minimalista i funcional pensat per a l'usuari final.
 
 🛠️ Stack Tecnològic
+------------------
+
 L'aplicació està construïda amb tecnologies web modernes per garantir velocitat i facilitat d'instal·lació:
 
-Frontend: HTML5, CSS3 i JavaScript (Vanilla).
-
-Backend: Node.js.
-
-Base de dades: SQLite (Base de dades local, sense necessitat de servidors externs).
+- __Frontend:__ HTML5, CSS3 i JavaScript (Vanilla).
+- __Backend:__ Node.js.
+- __Base de dades:__ SQLite (Base de dades local, sense necessitat de servidors externs).
 
 📂 Estructura del Projecte
+------------------------
+
 L'arbre de directoris es compon dels següents elements clau:
 
-server.js: Servidor principal en Node.js.
-
-index.html / styles.css / script.js: Nucli de l'interfície d'usuari.
-
-Clients.db: Fitxer de la base de dades SQLite.
-
-/uploads: Carpeta per a fitxers adjunts o documents.
-
-/Base de Dades Mensual: Històrics i còpies de seguretat.
+- __server.js:__ Servidor principal en Node.js.
+- __index.html / styles.css / script.js:__ Nucli de la interfície d'usuari.
+- __Clients.db:__ Fitxer de la base de dades SQLite.
+- __/uploads:__ Carpeta per a fitxers adjunts o documents.
+- __/Base de Dades Mensual:__ Històrics i còpies de seguretat.
 
 💻 Instal·lació i Ús
-Requisits previs
+-------------------
+
+__Requisits previs__
+
 Cal tenir instal·lat Node.js al sistema.
 
-Passos a seguir
-Descarregar el repositori a la teva màquina local.
+__Passos a seguir__
 
-Instal·lar les dependències:
-
-Bash
-
-npm install
+1. Descarregar el repositori a la teva màquina local.
+2. Instal·lar les dependències:
+   ```bash
+   npm install
 Executar l'aplicació:
 
 Bash
