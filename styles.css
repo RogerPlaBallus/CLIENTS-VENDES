@@ -215,6 +215,10 @@ button:hover {
     overflow-y: auto;
 }
 
+#deleteModal {
+    z-index: 1001;
+}
+
 #deleteModal .modal-content {
     width: 300px;
     text-align: center;

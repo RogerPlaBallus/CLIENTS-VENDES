@@ -12,6 +12,12 @@ function getCurrentDate() {
     return `${year}-${month}-${day}`;
 }
 
+// Helper function to format date to DD-MM-YYYY
+function formatDate(dateString) {
+    const [year, month, day] = dateString.split('-');
+    return `${day}-${month}-${year}`;
+}
+
 // DOM elements
 const clientList = document.getElementById('clientList');
 const searchInput = document.getElementById('searchInput');
@@ -346,16 +352,18 @@ function exportClientToExcel() {
     if (!client) return;
 
     const data = client.expenses.map(expense => ({
-        Data: expense.date,
-        'Producte/Servei': expense.product,
-        Preu: expense.price
+        Data: formatDate(expense.date),
+        Client: client.name,
+        'Producte / Servei': expense.product,
+        'Preu (€)': expense.price
     }));
 
     const ws = XLSX.utils.json_to_sheet(data);
     ws['!cols'] = [
         {wch: 12}, // Data
-        {wch: 25}, // Producte/Servei
-        {wch: 10}  // Preu
+        {wch: 20}, // Client
+        {wch: 25}, // Producte / Servei
+        {wch: 10}  // Preu (€)
     ];
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, client.name);
