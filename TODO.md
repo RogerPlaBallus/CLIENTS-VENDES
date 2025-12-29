@@ -1,4 +1,0 @@
-- [ ] Add search input field below "Selecciona:" in HTML
-- [ ] Modify renderSnippets function to accept filter term
-- [ ] Add event listener for snippetSearch input in script.js
-- [ ] Update showSnippetsModal to initialize search input

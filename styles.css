@@ -280,3 +280,21 @@ button:hover {
         padding: 15px;
     }
 }
+
+/* Export modal date inputs */
+#exportStartDate, #exportEndDate {
+    width: 200px;
+}
+
+/* Export modal styling */
+#exportModal .modal-content {
+    width: 400px;
+    max-width: 400px;
+}
+
+#exportModal .modal-content button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 0;
+}
