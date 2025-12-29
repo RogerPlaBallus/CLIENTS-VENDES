@@ -18,6 +18,11 @@ function formatDate(dateString) {
     return `${day}-${month}-${year}`;
 }
 
+// Helper function to normalize string for search (remove accents and lowercase)
+function normalizeString(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
 // DOM elements
 const clientList = document.getElementById('clientList');
 const searchInput = document.getElementById('searchInput');
@@ -237,7 +242,7 @@ function renderVendes() {
     allExpenses.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <span>${item.clientName} - ${formatDate(item.date)} - ${item.product} - €${item.price}</span>
+            <span>${formatDate(item.date)} - ${item.clientName} - ${item.product} - €${item.price}</span>
             <button onclick="showDeleteVendesModal(${item.clientId}, ${item.expenseIndex})" class="delete-btn small-delete-btn">Eliminar</button>
         `;
         vendesList.appendChild(li);
@@ -269,9 +274,9 @@ async function addExpense(e) {
 }
 
 function filterClients() {
-    const searchTerm = searchInput.value.toLowerCase();
+    const searchTerm = normalizeString(searchInput.value);
     const filteredClients = clients.filter(client =>
-        client.name.toLowerCase().includes(searchTerm)
+        normalizeString(client.name).includes(searchTerm)
     );
 
     clientList.innerHTML = '';
@@ -287,8 +292,13 @@ function filterClients() {
 }
 
 function filterSnippets() {
-    const searchTerm = snippetSearch.value.toLowerCase();
+    const searchTerm = normalizeString(snippetSearch.value);
     renderSnippets(searchTerm);
+}
+
+function filterVendes() {
+    const searchTerm = vendesSearchInput.value;
+    renderVendes(searchTerm);
 }
 
 function exportAllToExcel() {
@@ -321,8 +331,8 @@ function performExport() {
         client.expenses.forEach(expense => {
             if (expense.date >= startDate && expense.date <= endDate) {
                 data.push({
-                    Client: client.name,
                     Data: expense.date,
+                    Client: client.name,
                     'Producte/Servei': expense.product,
                     Preu: expense.price
                 });
@@ -404,7 +414,7 @@ function hideSnippetsModal() {
 function renderSnippets(filterTerm = '') {
     snippetsList.innerHTML = '';
     const filteredSnippets = snippets.filter(snippet =>
-        snippet.text.toLowerCase().includes(filterTerm.toLowerCase())
+        normalizeString(snippet.text).includes(normalizeString(filterTerm))
     );
     filteredSnippets.forEach((snippet, index) => {
         const li = document.createElement('li');
@@ -485,7 +495,7 @@ async function deleteExpense() {
                 await saveClients();
                 renderExpenses(client.expenses);
             } catch (error) {
-                // Restore the expense if save failed
+                // Restore the expense from local array if save failed
                 client.expenses.splice(expenseToDelete, 0, deletedExpense);
                 alert('Failed to delete expense. Please try again.');
             }
