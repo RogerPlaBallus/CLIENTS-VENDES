@@ -208,7 +208,7 @@ function renderExpenses(expenses) {
     expenses.forEach((expense, index) => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <span>${expense.date} - ${expense.product} - €${expense.price}</span>
+            <span>${formatDate(expense.date)} - ${expense.product} - €${expense.price}</span>
             <button onclick="showDeleteModal(${index})" class="delete-btn">Eliminar</button>
         `;
         expenseList.appendChild(li);
@@ -234,7 +234,7 @@ function renderVendes() {
     allExpenses.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <span>${item.clientName} - ${item.date} - ${item.product} - €${item.price}</span>
+            <span>${item.clientName} - ${formatDate(item.date)} - ${item.product} - €${item.price}</span>
             <button onclick="showDeleteVendesModal(${item.clientId}, ${item.expenseIndex})" class="delete-btn small-delete-btn">Eliminar</button>
         `;
         vendesList.appendChild(li);
