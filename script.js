@@ -43,6 +43,7 @@ const manageSnippetsBtn = document.getElementById('manageSnippetsBtn');
 const saveSnippetBtn = document.getElementById('saveSnippetBtn');
 const closeSnippetsModal = document.getElementById('closeSnippetsModal');
 const snippetsList = document.getElementById('snippetsList');
+const snippetSearch = document.getElementById('snippetSearch');
 const cancelNewClient = document.getElementById('cancelNewClient');
 const iniciBtn = document.getElementById('iniciBtn');
 const vendesBtn = document.getElementById('vendesBtn');
@@ -69,6 +70,7 @@ newClientBtn.addEventListener('click', showNewClientForm);
 newClientForm.addEventListener('submit', addClient);
 cancelNewClient.addEventListener('click', showClientList);
 searchInput.addEventListener('input', filterClients);
+snippetSearch.addEventListener('input', filterSnippets);
 addExpenseForm.addEventListener('submit', addExpense);
 backToList.addEventListener('click', showClientList);
 exportBtn.addEventListener('click', exportAllToExcel);
@@ -284,6 +286,11 @@ function filterClients() {
     });
 }
 
+function filterSnippets() {
+    const searchTerm = snippetSearch.value.toLowerCase();
+    renderSnippets(searchTerm);
+}
+
 function exportAllToExcel() {
     showExportModal();
 }
@@ -392,6 +399,7 @@ function exportDatabase() {
 
 function showSnippetsModal() {
     snippetsModal.style.display = 'flex';
+    snippetSearch.value = '';
     renderSnippets();
 }
 
@@ -399,14 +407,17 @@ function hideSnippetsModal() {
     snippetsModal.style.display = 'none';
 }
 
-function renderSnippets() {
+function renderSnippets(filterTerm = '') {
     snippetsList.innerHTML = '';
-    snippets.forEach((snippet, index) => {
+    const filteredSnippets = snippets.filter(snippet =>
+        snippet.text.toLowerCase().includes(filterTerm.toLowerCase())
+    );
+    filteredSnippets.forEach((snippet, index) => {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${snippet.text} - €${snippet.price}</span>
             <button onclick="selectSnippet('${snippet.text}', ${snippet.price})">Seleccionar</button>
-            <button onclick="showDeleteSnippetModal(${index}); event.stopPropagation();" class="delete-btn">🗑️</button>
+            <button onclick="showDeleteSnippetModal(${snippets.indexOf(snippet)}); event.stopPropagation();" class="delete-btn">🗑️</button>
         `;
         snippetsList.appendChild(li);
     });
