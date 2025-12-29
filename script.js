@@ -205,11 +205,12 @@ function showClientDetails(clientId) {
 
 function renderExpenses(expenses) {
     expenseList.innerHTML = '';
-    expenses.forEach((expense, index) => {
+    const sortedExpenses = expenses.map((expense, index) => ({ expense, originalIndex: index })).sort((a, b) => b.expense.date.localeCompare(a.expense.date));
+    sortedExpenses.forEach(({ expense, originalIndex }) => {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${formatDate(expense.date)} - ${expense.product} - €${expense.price}</span>
-            <button onclick="showDeleteModal(${index})" class="delete-btn">Eliminar</button>
+            <button onclick="showDeleteModal(${originalIndex})" class="delete-btn">Eliminar</button>
         `;
         expenseList.appendChild(li);
     });
