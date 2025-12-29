@@ -322,9 +322,6 @@ function performExport() {
             if (expense.date >= startDate && expense.date <= endDate) {
                 data.push({
                     Client: client.name,
-                    Telèfon: client.phone,
-                    Email: client.email,
-                    Direcció: client.address,
                     Data: expense.date,
                     'Producte/Servei': expense.product,
                     Preu: expense.price
@@ -341,9 +338,6 @@ function performExport() {
     const ws = XLSX.utils.json_to_sheet(data);
     ws['!cols'] = [
         {wch: 20}, // Client
-        {wch: 15}, // Telèfon
-        {wch: 25}, // Email
-        {wch: 30}, // Direcció
         {wch: 12}, // Data
         {wch: 25}, // Producte/Servei
         {wch: 10}  // Preu (€)
