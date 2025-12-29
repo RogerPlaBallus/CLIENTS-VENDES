@@ -298,3 +298,8 @@ button:hover {
     margin-top: 10px;
     margin-right: 0;
 }
+
+/* Expense date input styling */
+#expenseDate {
+    width: 150px;
+}
