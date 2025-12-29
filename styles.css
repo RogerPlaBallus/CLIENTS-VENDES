@@ -209,9 +209,9 @@ button:hover {
     background-color: white;
     padding: 10px;
     border-radius: 5px;
-    max-width: 900px;
-    width: 90%;
-    max-height: 80%;
+    max-width: 1200px;
+    width: 95%;
+    max-height: 90%;
     overflow-y: auto;
 }
 
