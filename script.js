@@ -23,6 +23,26 @@ function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
+// Helper function to get the next available ascending ID
+function getNextClientId() {
+    if (clients.length === 0) {
+        return 1;
+    }
+
+    const existingIds = clients.map(client => client.id).sort((a, b) => a - b);
+    let nextId = 1;
+
+    for (const id of existingIds) {
+        if (id === nextId) {
+            nextId++;
+        } else if (id > nextId) {
+            break;
+        }
+    }
+
+    return nextId;
+}
+
 // DOM elements
 const clientList = document.getElementById('clientList');
 const searchInput = document.getElementById('searchInput');
@@ -170,7 +190,7 @@ async function addClient(e) {
     const address = document.getElementById('address').value;
 
     const newClient = {
-        id: Date.now(),
+        id: getNextClientId(),
         name,
         phone,
         email,
