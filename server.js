@@ -23,7 +23,7 @@ const DB_PATH = 'Clients.db';
 const now = new Date();
 const month = String(now.getMonth() + 1).padStart(2, '0');
 const year = now.getFullYear();
-const currentMonthYear = `/${month}/${year}`;
+const currentMonthYear = `${month}-${year}`;
 
 const backupDir = 'Base de Dades Mensual';
 if (!fs.existsSync(backupDir)) {

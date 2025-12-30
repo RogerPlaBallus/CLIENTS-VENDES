@@ -296,10 +296,7 @@ function filterSnippets() {
     renderSnippets(searchTerm);
 }
 
-function filterVendes() {
-    const searchTerm = vendesSearchInput.value;
-    renderVendes(searchTerm);
-}
+
 
 function exportAllToExcel() {
     showExportModal();
