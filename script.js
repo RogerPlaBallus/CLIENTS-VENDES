@@ -74,6 +74,7 @@ const iniciBtn = document.getElementById('iniciBtn');
 const vendesBtn = document.getElementById('vendesBtn');
 const vendesSection = document.getElementById('vendesSection');
 const vendesList = document.getElementById('vendesList');
+const searchVendesInput = document.getElementById('searchVendesInput');
 const exportModal = document.getElementById('exportModal');
 const exportStartDate = document.getElementById('exportStartDate');
 const exportEndDate = document.getElementById('exportEndDate');
