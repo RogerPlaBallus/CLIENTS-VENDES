@@ -21,10 +21,8 @@ const DB_PATH = 'Clients.db';
 
 // Monthly database backup logic
 const now = new Date();
-const day = String(now.getDate()).padStart(2, '0');
 const month = String(now.getMonth() + 1).padStart(2, '0');
 const year = now.getFullYear();
-const dateStr = `${day}-${month}-${year}`;
 const currentMonthYear = `/${month}/${year}`;
 
 const backupDir = 'Base de Dades Mensual';
@@ -35,7 +33,9 @@ if (!fs.existsSync(backupDir)) {
 const files = fs.readdirSync(backupDir);
 const exists = files.some(file => file.startsWith('Clients_') && file.includes(currentMonthYear) && file.endsWith('.db'));
 
-if (!exists) {
+if (now.getDate() === 1 && !exists) {
+    const day = '01';
+    const dateStr = `${day}-${month}-${year}`;
     const dest = path.join(backupDir, `Clients_${dateStr}.db`);
     fs.copyFileSync(DB_PATH, dest);
     console.log(`Monthly backup created: ${dest}`);
