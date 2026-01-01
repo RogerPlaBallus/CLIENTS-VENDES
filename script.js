@@ -97,7 +97,7 @@ newClientForm.addEventListener('submit', addClient);
 cancelNewClient.addEventListener('click', showClientList);
 searchInput.addEventListener('input', filterClients);
 snippetSearch.addEventListener('input', filterSnippets);
-addExpenseForm.addEventListener('submit', addExpense);
+addExpenseBtn.addEventListener('click', addExpense);
 backToList.addEventListener('click', showClientList);
 exportBtn.addEventListener('click', exportAllToExcel);
 exportClientBtn.addEventListener('click', exportClientToExcel);
@@ -151,9 +151,14 @@ function renderClientList() {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${client.name}</span>
-            <button onclick="showDeleteClientModal(${client.id}); event.stopPropagation();" class="delete-btn">🗑️</button>
+            <button class="delete-btn">🗑️</button>
         `;
         li.addEventListener('click', () => showClientDetails(client.id));
+        const deleteBtn = li.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showDeleteClientModal(client.id);
+        });
         clientList.appendChild(li);
     });
 }
@@ -270,11 +275,15 @@ function renderVendes() {
     });
 }
 
-async function addExpense(e) {
-    e.preventDefault();
+async function addExpense() {
     const date = document.getElementById('expenseDate').value;
     const product = document.getElementById('expenseProduct').value;
     const price = parseFloat(document.getElementById('expensePrice').value);
+
+    if (!date || !product || !price || isNaN(price)) {
+        alert('Si us plau, omple tots els camps correctament.');
+        return;
+    }
 
     const client = clients.find(c => c.id === currentClientId);
     if (!client) return;
@@ -290,7 +299,7 @@ async function addExpense(e) {
     } catch (error) {
         // Remove the expense from local array if save failed
         client.expenses.pop();
-        alert('Failed to save expense. Please try again.');
+        alert('Error en guardar la venda. Torna-ho a provar.');
     }
 }
 
@@ -305,9 +314,14 @@ function filterClients() {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${client.name}</span>
-            <button onclick="showDeleteClientModal(${client.id}); event.stopPropagation();" class="delete-btn">🗑️</button>
+            <button class="delete-btn">🗑️</button>
         `;
         li.addEventListener('click', () => showClientDetails(client.id));
+        const deleteBtn = li.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showDeleteClientModal(client.id);
+        });
         clientList.appendChild(li);
     });
 }
