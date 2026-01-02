@@ -88,9 +88,10 @@ const db = initializeDatabase();
 app.get('/api/clients', (req, res) => {
     const query = `
         SELECT c.id, c.name, c.phone, c.email, c.address,
-               GROUP_CONCAT(JSON_OBJECT('date', e.date, 'product', e.product, 'price', e.price)) as expenses
+               (SELECT GROUP_CONCAT(JSON_OBJECT('date', e.date, 'product', e.product, 'price', e.price))
+                FROM expenses e
+                WHERE e.client_id = c.id AND e.product IS NOT NULL AND e.price IS NOT NULL) as expenses
         FROM clients c
-        LEFT JOIN expenses e ON c.id = e.client_id
         GROUP BY c.id
     `;
 

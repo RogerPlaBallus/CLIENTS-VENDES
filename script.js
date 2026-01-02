@@ -3,6 +3,44 @@ let clients = [];
 let currentClientId = null;
 let snippets = [];
 
+// DOM elements
+let clientList;
+let searchInput;
+let newClientBtn;
+let newClientForm;
+let newClientSection;
+let clientDetailsSection;
+let clientName;
+let clientPhone;
+let clientEmail;
+let clientAddress;
+let expenseList;
+let addExpenseForm;
+let backToList;
+let exportBtn;
+let exportClientBtn;
+let exportDbBtn;
+let deleteModal;
+let confirmDelete;
+let cancelDelete;
+let snippetsModal;
+let manageSnippetsBtn;
+let saveSnippetBtn;
+let closeSnippetsModal;
+let snippetsList;
+let snippetSearch;
+let cancelNewClient;
+let iniciBtn;
+let vendesBtn;
+let vendesSection;
+let vendesList;
+let searchVendesInput;
+let exportModal;
+let exportStartDate;
+let exportEndDate;
+let confirmExport;
+let cancelExport;
+
 // Helper function to get current date in YYYY-MM-DD format
 function getCurrentDate() {
     const today = new Date();
@@ -14,6 +52,7 @@ function getCurrentDate() {
 
 // Helper function to format date to DD-MM-YYYY
 function formatDate(dateString) {
+    if (!dateString) return '';
     const [year, month, day] = dateString.split('-');
     return `${day}-${month}-${year}`;
 }
@@ -43,105 +82,105 @@ function getNextClientId() {
     return nextId;
 }
 
-// DOM elements
-const clientList = document.getElementById('clientList');
-const searchInput = document.getElementById('searchInput');
-const newClientBtn = document.getElementById('newClientBtn');
-const newClientForm = document.getElementById('newClientForm');
-const newClientSection = document.getElementById('newClientSection');
-const clientDetailsSection = document.getElementById('clientDetailsSection');
-const clientName = document.getElementById('clientName');
-const clientPhone = document.getElementById('clientPhone');
-const clientEmail = document.getElementById('clientEmail');
-const clientAddress = document.getElementById('clientAddress');
-const expenseList = document.getElementById('expenseList');
-const addExpenseForm = document.getElementById('addExpenseForm');
-const backToList = document.getElementById('backToList');
-const exportBtn = document.getElementById('exportBtn');
-const exportClientBtn = document.getElementById('exportClientBtn');
-const exportDbBtn = document.getElementById('exportDbBtn');
-const deleteModal = document.getElementById('deleteModal');
-const confirmDelete = document.getElementById('confirmDelete');
-const cancelDelete = document.getElementById('cancelDelete');
-const snippetsModal = document.getElementById('snippetsModal');
-const manageSnippetsBtn = document.getElementById('manageSnippetsBtn');
-const saveSnippetBtn = document.getElementById('saveSnippetBtn');
-const closeSnippetsModal = document.getElementById('closeSnippetsModal');
-const snippetsList = document.getElementById('snippetsList');
-const snippetSearch = document.getElementById('snippetSearch');
-const cancelNewClient = document.getElementById('cancelNewClient');
-const iniciBtn = document.getElementById('iniciBtn');
-const vendesBtn = document.getElementById('vendesBtn');
-const vendesSection = document.getElementById('vendesSection');
-const vendesList = document.getElementById('vendesList');
-const searchVendesInput = document.getElementById('searchVendesInput');
-const exportModal = document.getElementById('exportModal');
-const exportStartDate = document.getElementById('exportStartDate');
-const exportEndDate = document.getElementById('exportEndDate');
-const confirmExport = document.getElementById('confirmExport');
-const cancelExport = document.getElementById('cancelExport');
-
 // Event listeners
 document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize DOM elements
+    clientList = document.getElementById('clientList');
+    searchInput = document.getElementById('searchInput');
+    newClientBtn = document.getElementById('newClientBtn');
+    newClientForm = document.getElementById('newClientForm');
+    newClientSection = document.getElementById('newClientSection');
+    clientDetailsSection = document.getElementById('clientDetailsSection');
+    clientName = document.getElementById('clientName');
+    clientPhone = document.getElementById('clientPhone');
+    clientEmail = document.getElementById('clientEmail');
+    clientAddress = document.getElementById('clientAddress');
+    expenseList = document.getElementById('expenseList');
+    addExpenseForm = document.getElementById('addExpenseForm');
+    backToList = document.getElementById('backToList');
+    exportBtn = document.getElementById('exportBtn');
+    exportClientBtn = document.getElementById('exportClientBtn');
+    exportDbBtn = document.getElementById('exportDbBtn');
+    deleteModal = document.getElementById('deleteModal');
+    confirmDelete = document.getElementById('confirmDelete');
+    cancelDelete = document.getElementById('cancelDelete');
+    snippetsModal = document.getElementById('snippetsModal');
+    manageSnippetsBtn = document.getElementById('manageSnippetsBtn');
+    saveSnippetBtn = document.getElementById('saveSnippetBtn');
+    closeSnippetsModal = document.getElementById('closeSnippetsModal');
+    snippetsList = document.getElementById('snippetsList');
+    snippetSearch = document.getElementById('snippetSearch');
+    cancelNewClient = document.getElementById('cancelNewClient');
+    iniciBtn = document.getElementById('iniciBtn');
+    vendesBtn = document.getElementById('vendesBtn');
+    vendesSection = document.getElementById('vendesSection');
+    vendesList = document.getElementById('vendesList');
+    searchVendesInput = document.getElementById('searchVendesInput');
+    exportModal = document.getElementById('exportModal');
+    exportStartDate = document.getElementById('exportStartDate');
+    exportEndDate = document.getElementById('exportEndDate');
+    confirmExport = document.getElementById('confirmExport');
+    cancelExport = document.getElementById('cancelExport');
+
     await loadClients();
     await loadSnippets();
     // Ensure modals are hidden on load
     hideSnippetsModal();
     hideDeleteModal();
-});
 
-iniciBtn.addEventListener('click', showClientList);
-vendesBtn.addEventListener('click', showVendes);
-newClientBtn.addEventListener('click', showNewClientForm);
-newClientForm.addEventListener('submit', addClient);
-cancelNewClient.addEventListener('click', showClientList);
-searchInput.addEventListener('input', filterClients);
-snippetSearch.addEventListener('input', filterSnippets);
-addExpenseBtn.addEventListener('click', addExpense);
-backToList.addEventListener('click', showClientList);
-exportBtn.addEventListener('click', exportAllToExcel);
-exportClientBtn.addEventListener('click', exportClientToExcel);
-exportDbBtn.addEventListener('click', exportDatabase);
-manageSnippetsBtn.addEventListener('click', showSnippetsModal);
-saveSnippetBtn.addEventListener('click', saveSnippet);
-closeSnippetsModal.addEventListener('click', hideSnippetsModal);
-confirmDelete.addEventListener('click', deleteExpense);
-cancelDelete.addEventListener('click', hideDeleteModal);
-confirmExport.addEventListener('click', performExport);
-cancelExport.addEventListener('click', hideExportModal);
+    iniciBtn.addEventListener('click', showClientList);
+    vendesBtn.addEventListener('click', showVendes);
+    newClientBtn.addEventListener('click', showNewClientForm);
+    newClientForm.addEventListener('submit', addClient);
+    cancelNewClient.addEventListener('click', showClientList);
+    searchInput.addEventListener('input', filterClients);
+    snippetSearch.addEventListener('input', filterSnippets);
+    addExpenseBtn.addEventListener('click', addExpense);
+    backToList.addEventListener('click', showClientList);
+    exportBtn.addEventListener('click', exportAllToExcel);
+    exportClientBtn.addEventListener('click', exportClientToExcel);
+    exportDbBtn.addEventListener('click', exportDatabase);
+    manageSnippetsBtn.addEventListener('click', showSnippetsModal);
+    saveSnippetBtn.addEventListener('click', saveSnippet);
+    closeSnippetsModal.addEventListener('click', hideSnippetsModal);
+    confirmDelete.addEventListener('click', deleteExpense);
+    cancelDelete.addEventListener('click', hideDeleteModal);
+    confirmExport.addEventListener('click', performExport);
+    cancelExport.addEventListener('click', hideExportModal);
 
-// Close modals by clicking outside
-snippetsModal.addEventListener('click', (e) => {
-    if (e.target === snippetsModal) {
-        hideSnippetsModal();
-    }
-});
-
-deleteModal.addEventListener('click', (e) => {
-    if (e.target === deleteModal) {
-        hideDeleteModal();
-    }
-});
-
-exportModal.addEventListener('click', (e) => {
-    if (e.target === exportModal) {
-        hideExportModal();
-    }
-});
-
-// Close modals with ESC key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        if (snippetsModal.style.display !== 'none') {
+    // Close modals by clicking outside
+    snippetsModal.addEventListener('click', (e) => {
+        if (e.target === snippetsModal) {
             hideSnippetsModal();
         }
-        if (deleteModal.style.display !== 'none') {
+    });
+
+    deleteModal.addEventListener('click', (e) => {
+        if (e.target === deleteModal) {
             hideDeleteModal();
         }
-        if (exportModal.style.display !== 'none') {
+    });
+
+    exportModal.addEventListener('click', (e) => {
+        if (e.target === exportModal) {
             hideExportModal();
         }
-    }
+    });
+
+    // Close modals with ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (snippetsModal.style.display !== 'none') {
+                hideSnippetsModal();
+            }
+            if (deleteModal.style.display !== 'none') {
+                hideDeleteModal();
+            }
+            if (exportModal.style.display !== 'none') {
+                hideExportModal();
+            }
+        }
+    });
 });
 
 // Functions
@@ -217,8 +256,10 @@ async function addClient(e) {
 }
 
 function showClientDetails(clientId) {
+    console.log('showClientDetails called with clientId:', clientId);
     currentClientId = clientId;
     const client = clients.find(c => c.id === clientId);
+    console.log('Found client:', client);
     if (!client) return;
 
     clientName.textContent = client.name;
@@ -234,11 +275,17 @@ function showClientDetails(clientId) {
     document.getElementById('clientListSection').classList.add('hidden');
     newClientSection.classList.add('hidden');
     clientDetailsSection.classList.remove('hidden');
+    console.log('Sections toggled');
 }
 
 function renderExpenses(expenses) {
     expenseList.innerHTML = '';
-    const sortedExpenses = expenses.map((expense, index) => ({ expense, originalIndex: index })).sort((a, b) => b.expense.date.localeCompare(a.expense.date));
+    const validExpenses = expenses.filter(expense => expense.product !== null && expense.price !== null);
+    const sortedExpenses = validExpenses.map((expense, index) => ({ expense, originalIndex: index })).sort((a, b) => {
+        if (!a.expense.date) return 1;
+        if (!b.expense.date) return -1;
+        return b.expense.date.localeCompare(a.expense.date);
+    });
     sortedExpenses.forEach(({ expense, originalIndex }) => {
         const li = document.createElement('li');
         li.innerHTML = `
@@ -254,17 +301,23 @@ function renderVendes() {
     const allExpenses = [];
     clients.forEach(client => {
         client.expenses.forEach((expense, index) => {
-            allExpenses.push({
-                clientId: client.id,
-                clientName: client.name,
-                expenseIndex: index,
-                date: expense.date,
-                product: expense.product,
-                price: expense.price
-            });
+            if (expense.product !== null && expense.price !== null) {
+                allExpenses.push({
+                    clientId: client.id,
+                    clientName: client.name,
+                    expenseIndex: index,
+                    date: expense.date,
+                    product: expense.product,
+                    price: expense.price
+                });
+            }
         });
     });
-    allExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+    allExpenses.sort((a, b) => {
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return new Date(b.date) - new Date(a.date);
+    });
     allExpenses.forEach(item => {
         const li = document.createElement('li');
         li.innerHTML = `
