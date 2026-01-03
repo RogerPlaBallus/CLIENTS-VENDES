@@ -14,6 +14,9 @@ let clientName;
 let clientPhone;
 let clientEmail;
 let clientAddress;
+let clientNotepad;
+let notepadTextarea;
+let expandNotepadBtn;
 let expenseList;
 let addExpenseForm;
 let backToList;
@@ -95,6 +98,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     clientPhone = document.getElementById('clientPhone');
     clientEmail = document.getElementById('clientEmail');
     clientAddress = document.getElementById('clientAddress');
+    clientNotepad = document.getElementById('clientNotepad');
+    notepadTextarea = document.getElementById('notepadTextarea');
+    expandNotepadBtn = document.getElementById('expandNotepadBtn');
     expenseList = document.getElementById('expenseList');
     addExpenseForm = document.getElementById('addExpenseForm');
     backToList = document.getElementById('backToList');
@@ -147,6 +153,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     cancelDelete.addEventListener('click', hideDeleteModal);
     confirmExport.addEventListener('click', performExport);
     cancelExport.addEventListener('click', hideExportModal);
+
+    // Notepad event listeners
+    notepadTextarea.addEventListener('input', saveNotepad);
+    expandNotepadBtn.addEventListener('click', toggleNotepadSize);
 
     // Close modals by clicking outside
     snippetsModal.addEventListener('click', (e) => {
@@ -662,5 +672,27 @@ async function saveSnippets() {
         });
     } catch (error) {
         console.error('Error saving snippets:', error);
+    }
+}
+
+// Notepad functions
+async function saveNotepad() {
+    const client = clients.find(c => c.id === currentClientId);
+    if (!client) return;
+
+    client.notepad = notepadTextarea.value;
+    try {
+        await saveClients();
+    } catch (error) {
+        console.error('Error saving notepad:', error);
+    }
+}
+
+function toggleNotepadSize() {
+    clientNotepad.classList.toggle('expanded');
+    if (clientNotepad.classList.contains('expanded')) {
+        expandNotepadBtn.textContent = '⤣';
+    } else {
+        expandNotepadBtn.textContent = '⤢';
     }
 }

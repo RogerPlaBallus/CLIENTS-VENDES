@@ -52,7 +52,8 @@ function initializeDatabase() {
                 name TEXT,
                 phone TEXT,
                 email TEXT,
-                address TEXT
+                address TEXT,
+                notepad TEXT DEFAULT ''
             )
         `);
 
@@ -87,7 +88,7 @@ const db = initializeDatabase();
 // Get all clients with their expenses
 app.get('/api/clients', (req, res) => {
     const query = `
-        SELECT c.id, c.name, c.phone, c.email, c.address,
+        SELECT c.id, c.name, c.phone, c.email, c.address, c.notepad,
                (SELECT GROUP_CONCAT(JSON_OBJECT('date', e.date, 'product', e.product, 'price', e.price))
                 FROM expenses e
                 WHERE e.client_id = c.id AND e.product IS NOT NULL AND e.price IS NOT NULL) as expenses
@@ -106,6 +107,7 @@ app.get('/api/clients', (req, res) => {
             phone: row.phone,
             email: row.email,
             address: row.address,
+            notepad: row.notepad || '',
             expenses: row.expenses ? JSON.parse(`[${row.expenses}]`) : []
         }));
 
